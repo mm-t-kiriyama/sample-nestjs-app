@@ -1,0 +1,79 @@
+openapi: 3.0.0
+paths:
+  /cities:
+    get:
+      operationId: CitiesController_findAll
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/City'
+  /cities/{id}:
+    get:
+      operationId: CitiesController_findById
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/City'
+info:
+  title: Cities
+  description: Cities API description
+  version: '1.0'
+  contact: {}
+tags:
+  - name: cities
+    description: ''
+servers: []
+components:
+  schemas:
+    City:
+      type: object
+      properties:
+        id:
+          type: number
+        m_prefecture_id:
+          type: number
+        name:
+          type: string
+        name_hiragana:
+          type: string
+        name_katakana:
+          type: string
+        parent_city_id:
+          type: number
+        is_designated:
+          type: boolean
+        created_at:
+          type: number
+        updated_at:
+          type: number
+        created_by:
+          type: string
+        updated_by:
+          type: string
+      required:
+        - id
+        - m_prefecture_id
+        - name
+        - name_hiragana
+        - name_katakana
+        - parent_city_id
+        - is_designated
+        - created_at
+        - updated_at
+        - created_by
+        - updated_by
