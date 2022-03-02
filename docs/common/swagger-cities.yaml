@@ -2,8 +2,8 @@ openapi: 3.0.0
 paths:
   /cities/{id}:
     get:
-      operationId: findAll
-      summary: 都道府県リストを取得する
+      operationId: findById
+      summary: 市区町村IDの市区町村情報を取得する
       description: 市区町村IDの市区町村情報を取得する
       parameters:
         - name: id
@@ -64,7 +64,15 @@ components:
           example: true
           description: 政令指定都市フラグ
         prefecture:
-          $ref: '#/components/schemas/Prefecture'
+          description: >-
+            リレーションを定義
+
+            NOTE: 複数の市区町村は1つの都道府県を持つ = ManyToOne
+
+            SEE:
+            https://orkhan.gitbook.io/typeorm/docs/many-to-one-one-to-many-relations
+          allOf:
+            - $ref: '#/components/schemas/Prefecture'
       required:
         - id
         - m_prefecture_id
@@ -101,7 +109,13 @@ components:
           example: osaka
           description: 都道府県名_カタカナ
         city:
-          description: 1対1の関係を記載
+          description: >-
+            リレーションを定義
+
+            NOTE: 1つの都道府県は複数の市区町村を持つ = OneToMany
+
+            SEE:
+            https://orkhan.gitbook.io/typeorm/docs/many-to-one-one-to-many-relations
           allOf:
             - $ref: '#/components/schemas/City'
       required:

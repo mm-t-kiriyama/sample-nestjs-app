@@ -9,7 +9,7 @@ export class City {
     readonly id: number;
 
     @ApiProperty({example: 27, description: '市区町村に紐づく都道府県ID'})
-    @Column({type: 'int', length: 11 ,comment: '都道府県ID'})
+    @Column({type: 'int',comment: '都道府県ID'})
     m_prefecture_id: number;
 
     @ApiProperty({example: '大阪市', description: '市区町村名'})
@@ -33,11 +33,11 @@ export class City {
     is_designated: boolean
 
     @ApiHideProperty()
-    @Column({type: 'bigint', length: 20, comment: '作成日'})
+    @Column({type: 'bigint', comment: '作成日'})
     created_at: number
 
     @ApiHideProperty()
-    @Column({type: 'bigint', length: 20, comment: '更新日'})
+    @Column({type: 'bigint', comment: '更新日'})
     updated_at: number
 
     @ApiHideProperty()

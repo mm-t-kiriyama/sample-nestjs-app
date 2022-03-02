@@ -10,8 +10,15 @@ export class CitiesService {
     private citiesRepository: Repository<City>
   ) { }
 
+  /**
+   * SELECTする項目
+   * NOTE: 定数として定義しておくと使い回すことが出来ます
+   * @type {Array<(keyof)City[]>}
+   */
+  readonly SELECT_FIELDS : (keyof City)[] = ['id', 'name', 'name_hiragana', 'name_katakana', 'parent_city_id', 'is_designated']
+
   findById(id: number): Promise<City> {
-    return this.citiesRepository.findOneOrFail({
+    return this.citiesRepository.findOne({
       // select: ['カラム名'] でSELECTする項目を指定
       select: ['id', 'name', 'name_hiragana', 'name_katakana', 'parent_city_id', 'is_designated'],
       // where: { <カラム名>: <検索値>  } でWHERE句の条件を指定
@@ -37,7 +44,7 @@ export class CitiesService {
      */
     return this.citiesRepository.find({
       // select: ['カラム名'] でSELECTする項目を指定
-      select: ['id', 'name', 'name_hiragana', 'name_katakana', 'parent_city_id', 'is_designated'],
+      select: this.SELECT_FIELDS,
       // where: { <カラム名>: <検索値>  } でWHERE句の条件を指定
       where: { m_prefecture_id: prefecture_id }
     })

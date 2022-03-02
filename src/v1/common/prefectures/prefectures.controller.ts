@@ -64,7 +64,7 @@ export class PrefecturesController {
   async findCitiesByPrefectureId(@Param('id') id: string): Promise<City[]> {
     const cities = await this.citiesService.findByPrefectureId(+id)
     // 市区町村リストが取得出来ない場合は 404エラーを投げる
-    // SEE: 
+    // SEE: https://docs.nestjs.com/exception-filters
     if (!cities.length) {
       throw new NotFoundException
     }

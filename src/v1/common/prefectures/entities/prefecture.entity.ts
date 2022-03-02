@@ -10,7 +10,7 @@ export class Prefecture {
     readonly id: number;
 
     @ApiProperty({example: 7, description: '都道府県に紐づくエリアID'})
-    @Column({type: 'int', length: 11 ,comment: 'エリアID'})
+    @Column({type: 'int',comment: 'エリアID'})
     m_areas_id: number;
 
     @ApiProperty({example: '大阪府', description: '都道府県名'})
@@ -30,11 +30,11 @@ export class Prefecture {
     name_roman: string
 
     @ApiHideProperty() // OpenAPI に盛り込まないように設定
-    @Column({type: 'bigint', length: 20, comment: '作成日'})
+    @Column({type: 'bigint', comment: '作成日'})
     created_at: number
 
     @ApiHideProperty()
-    @Column({type: 'bigint', length: 20, comment: '作成日'})
+    @Column({type: 'bigint', comment: '作成日'})
     updated_at: number
 
     @ApiHideProperty()
