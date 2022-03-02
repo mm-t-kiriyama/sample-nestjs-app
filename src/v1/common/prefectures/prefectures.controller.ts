@@ -8,6 +8,8 @@ import {
   Body,
   Post,
   ValidationPipe,
+  Query,
+  UsePipes,
 } from '@nestjs/common';
 import { PrefecturesService } from './prefectures.service';
 import { Prefecture } from './entities/prefecture.entity';
@@ -33,13 +35,28 @@ export class PrefecturesController {
   /**
    * POSTバリデーションの確認用メソッド
    * NOTE: createPrefectureDtoに記載されているリクエストBodyの形式でないとエラーが発生する
-   * 
-   * @param createPrefectureDto 
-   * @returns 
+   *
+   * @param createPrefectureDto
+   * @returns
    */
   @Post()
-  async create(@Body(new ValidationPipe()) createPrefectureDto: CreatePrefectureDto) {
-    return 'response OK'
+  @UsePipes(new ValidationPipe())
+  async create(@Body() createPrefectureDto: CreatePrefectureDto) {
+    return 'response OK';
+  }
+
+  /**
+   * クエリパラメータのバリデーション確認用メソッド
+   * NOTE: note that ParseStringPipe is not needed because, as mentioned earlier,
+   *       every path parameter and query parameter comes over the network as a string by default.
+   * SEE: https://docs.nestjs.com/techniques/validation
+   *
+   * @param name
+   * @returns
+   */
+  @Get('/test-query-param')
+  async testQueryParam(@Query('id', ParseIntPipe) number: string) {
+    return 'response OK';
   }
 
   /**
@@ -90,7 +107,9 @@ export class PrefecturesController {
     operationId: 'findCitiesByPrefectureId',
     summary: '都道府県IDに紐づく市区町村リストを取得する',
   })
-  async findCitiesByPrefectureId(@Param('id', ParseIntPipe) id: number): Promise<City[]> {
+  async findCitiesByPrefectureId(
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<City[]> {
     const cities = await this.citiesService.findByPrefectureId(id);
     // 市区町村リストが取得出来ない場合は 404エラーを投げる
     // SEE: https://docs.nestjs.com/exception-filters

@@ -1,10 +1,5 @@
 import { ApiHideProperty, ApiProperty } from '@nestjs/swagger';
-import {
-  Column,
-  PrimaryGeneratedColumn,
-  Entity,
-  OneToMany,
-} from 'typeorm';
+import { Column, PrimaryGeneratedColumn, Entity, OneToMany } from 'typeorm';
 import { City } from '../../cities/entities/city.entity';
 
 // @Entity('<テーブル名>')

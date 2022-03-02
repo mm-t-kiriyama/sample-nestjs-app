@@ -38,6 +38,34 @@ paths:
                 items:
                   $ref: '#/components/schemas/Prefecture'
       tags: *ref_0
+  /prefectures/test-query-param:
+    get:
+      operationId: PrefecturesController_testQueryParam
+      summary: ''
+      description: >-
+        クエリパラメータのバリデーション確認用メソッド
+
+        NOTE: note that ParseStringPipe is not needed because, as mentioned
+        earlier,
+
+        every path parameter and query parameter comes over the network as a
+        string by default.
+
+        SEE: https://docs.nestjs.com/techniques/validation
+      parameters:
+        - name: id
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+      tags: *ref_0
   /prefectures/{id}:
     get:
       operationId: findById
