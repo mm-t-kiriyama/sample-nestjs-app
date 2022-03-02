@@ -5,6 +5,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { PrefecturesModule } from './v1/common/prefectures/prefectures.module';
 import { CitiesModule } from './v1/common/cities/cities.module';
 import { Connection } from 'typeorm';
+import { JobOffersModule } from './v1/common/job-offers/job-offers.module';
+import { IryouJobOffersModule } from './v1/iryou/job-offers/job-offers.module';
 
 @Module({
   imports: [
@@ -21,6 +23,8 @@ import { Connection } from 'typeorm';
     }),
     PrefecturesModule,
     CitiesModule,
+    JobOffersModule,
+    IryouJobOffersModule
   ],
   controllers: [AppController],
   providers: [AppService],

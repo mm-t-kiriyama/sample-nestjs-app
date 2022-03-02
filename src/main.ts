@@ -5,6 +5,7 @@ import { dump } from 'js-yaml';
 import { AppModule } from './app.module';
 import { CitiesModule } from './v1/common/cities/cities.module';
 import { PrefecturesModule } from './v1/common/prefectures/prefectures.module';
+import { IryouJobOffersModule } from './v1/iryou/job-offers/job-offers.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -59,6 +60,21 @@ async function bootstrap() {
   fs.writeFileSync(
     './docs/common/swagger-cities.yaml',
     dump(citiesDocuments, {}),
+  );
+
+  // Iryou Documents
+  const IryouOptions = new DocumentBuilder()
+    .setTitle('Iryou')
+    .setDescription('Iryou API description')
+    .setVersion('1.0')
+    .addTag('iryou')
+    .build();
+  const iryouDocuments = SwaggerModule.createDocument(app, IryouOptions, {
+    include: [IryouJobOffersModule], // 医療に関するモジュールを追加していく
+  });
+  fs.writeFileSync(
+    './docs/common/swagger-iryou.yaml',
+    dump(iryouDocuments, {})
   );
 
   await app.listen(3000);

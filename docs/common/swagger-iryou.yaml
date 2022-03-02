@@ -1,0 +1,52 @@
+openapi: 3.0.0
+paths:
+  /iryou/job-offers:
+    get:
+      operationId: IryouJobOffersController_findAll
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+  /iryou/job-offers/{id}:
+    get:
+      operationId: IryouJobOffersController_findOne
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IryouJobOffer'
+info:
+  title: Iryou
+  description: Iryou API description
+  version: '1.0'
+  contact: {}
+tags:
+  - name: iryou
+    description: ''
+servers: []
+components:
+  schemas:
+    IryouJobOffer:
+      type: object
+      properties:
+        id:
+          type: number
+        catch_phrase:
+          type: string
+      required:
+        - id
+        - catch_phrase

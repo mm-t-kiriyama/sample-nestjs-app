@@ -9,6 +9,6 @@ import { CitiesModule } from 'src/v1/common/cities/cities.module';
   imports: [TypeOrmModule.forFeature([Prefecture]), CitiesModule],
   controllers: [PrefecturesController],
   providers: [PrefecturesService],
-  exports: [PrefecturesService, TypeOrmModule],
+  exports: [PrefecturesService],
 })
 export class PrefecturesModule {}
