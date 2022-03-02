@@ -7,18 +7,32 @@ import { Repository } from 'typeorm';
 export class PrefecturesService {
   constructor(
     @InjectRepository(Prefecture)
-    private prefecturesRepository: Repository<Prefecture>
+    private prefecturesRepository: Repository<Prefecture>,
   ) {}
 
   findAll() {
     return this.prefecturesRepository.find({
-      select: ['id', 'm_areas_id', 'name', 'name_hiragana', 'name_katakana', 'name_roman']
-    })
+      select: [
+        'id',
+        'm_areas_id',
+        'name',
+        'name_hiragana',
+        'name_katakana',
+        'name_roman',
+      ],
+    });
   }
 
   findById(id: number) {
     return this.prefecturesRepository.findOne(id, {
-      select: ['id', 'm_areas_id', 'name', 'name_hiragana', 'name_katakana', 'name_roman']
-    })
+      select: [
+        'id',
+        'm_areas_id',
+        'name',
+        'name_hiragana',
+        'name_katakana',
+        'name_roman',
+      ],
+    });
   }
 }

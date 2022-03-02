@@ -1,6 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseFilters, NotFoundException } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  UseFilters,
+  NotFoundException,
+} from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { HttpExceptionFilter } from '../../../filters/http-exception.filter';
+import { HttpExceptionFilter } from '../../../app/filters/http-exception.filter';
 import { CitiesService } from './cities.service';
 import { City } from './entities/city.entity';
 
@@ -12,19 +18,22 @@ export class CitiesController {
 
   /**
    * 市区町村IDの市区町村情報を取得する
-   * 
+   *
    * @param {string} id 市区町村ID
-   * @returns 
+   * @returns
    */
   @Get(':id')
-  @ApiOperation({ operationId: 'findById', summary: '市区町村IDの市区町村情報を取得する' })
+  @ApiOperation({
+    operationId: 'findById',
+    summary: '市区町村IDの市区町村情報を取得する',
+  })
   async findById(@Param('id') id: string): Promise<City> {
-    const city = await this.citiesService.findById(+id)
+    const city = await this.citiesService.findById(+id);
     // エラーハンドリング
     if (!city) {
-      throw new NotFoundException
+      throw new NotFoundException();
     }
 
-    return city
+    return city;
   }
 }
