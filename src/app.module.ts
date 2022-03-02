@@ -2,11 +2,11 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { PrefecturesModule } from './prefectures/prefectures.module';
-import { CitiesModule } from './cities/cities.module';
+import { PrefecturesModule } from './v1/common/prefectures/prefectures.module';
+import { CitiesModule } from './v1/common/cities/cities.module';
 import { Connection } from 'typeorm';
-import { Prefecture } from './prefectures/entities/prefecture.entity';
-import { City } from './cities/entities/city.entity';
+import { Prefecture } from './v1/common/prefectures/entities/prefecture.entity';
+import { City } from './v1/common/cities/entities/city.entity';
 
 @Module({
   imports: [
@@ -22,7 +22,7 @@ import { City } from './cities/entities/city.entity';
       // synchronize: true,
     }),
     PrefecturesModule,
-    CitiesModule
+    CitiesModule,
   ],
   controllers: [AppController, ],
   providers: [AppService, ],

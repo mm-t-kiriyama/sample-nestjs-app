@@ -43,6 +43,9 @@ $ npm run start:dev
 
 # production mode
 $ npm run start:prod
+
+# ドキュメントを生成 (localhost:8080)
+$ npm run doc
 ```
 
 ## Test

@@ -2,7 +2,9 @@ openapi: 3.0.0
 paths:
   /prefectures:
     get:
-      operationId: PrefecturesController_findAll
+      operationId: findAll
+      summary: 都道府県リストを取得する
+      description: 都道府県一覧を取得する
       parameters: []
       responses:
         '200':
@@ -13,9 +15,22 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Prefecture'
+      tags: &ref_0
+        - prefectures
   /prefectures/{id}:
     get:
-      operationId: PrefecturesController_findById
+      operationId: findById
+      summary: 都道府県IDの都道府県情報を取得する
+      description: |-
+        都道府県IDの都道府県情報を取得する
+
+
+
+
+
+
+        NOTE: このように各メソッドにDocコメントを記載してください.
+        また、必要に応じてアノテーションコメントを入れると読み手にわかりやすくなるので非常にWellです
       parameters:
         - name: id
           required: true
@@ -29,9 +44,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Prefecture'
+      tags: *ref_0
   /prefectures/{id}/cities:
     get:
-      operationId: PrefecturesController_findCitiesByPrefectureId
+      operationId: findCitiesByPrefectureId
+      summary: 都道府県IDに紐づく市区町村リストを取得する
+      description: 都道府県IDに紐づく市区町村リストを取得する
       parameters:
         - name: id
           required: true
@@ -47,6 +65,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/City'
+      tags: *ref_0
 info:
   title: Prefectures
   description: Prefectures API description
@@ -54,7 +73,7 @@ info:
   contact: {}
 tags:
   - name: prefectures
-    description: ''
+    description: 都道府県API
 servers: []
 components:
   schemas:
@@ -63,26 +82,32 @@ components:
       properties:
         id:
           type: number
-          example: 1
+          example: 27
           description: 都道府県ID
         m_areas_id:
           type: number
+          example: 7
+          description: 都道府県に紐づくエリアID
         name:
           type: string
+          example: 大阪府
+          description: 都道府県名
         name_hiragana:
           type: string
+          example: おおさかふ
+          description: 都道府県名_ひらがな
         name_katakana:
           type: string
+          example: オオサカフ
+          description: 都道府県名_カタカナ
         name_roman:
           type: string
-        created_at:
-          type: number
-        updated_at:
-          type: number
-        created_by:
-          type: string
-        updated_by:
-          type: string
+          example: osaka
+          description: 都道府県名_カタカナ
+        city:
+          description: 1対1の関係を記載
+          allOf:
+            - $ref: '#/components/schemas/City'
       required:
         - id
         - m_areas_id
@@ -90,35 +115,40 @@ components:
         - name_hiragana
         - name_katakana
         - name_roman
-        - created_at
-        - updated_at
-        - created_by
-        - updated_by
     City:
       type: object
       properties:
         id:
           type: number
+          example: 27100
+          description: 市区町村ID
         m_prefecture_id:
           type: number
+          example: 27
+          description: 市区町村に紐づく都道府県ID
         name:
           type: string
+          example: 大阪市
+          description: 市区町村名
         name_hiragana:
           type: string
+          example: ひらがな
+          description: 市区町村名_ひらがな
         name_katakana:
           type: string
+          example: オオサカシ
+          description: 市区町村名_カタカナ
         parent_city_id:
           type: number
+          nullable: true
+          example: 27100
+          description: 特別区,行政区が属する政令指定都市の市区町村ID
         is_designated:
           type: boolean
-        created_at:
-          type: number
-        updated_at:
-          type: number
-        created_by:
-          type: string
-        updated_by:
-          type: string
+          example: true
+          description: 政令指定都市フラグ
+        prefecture:
+          $ref: '#/components/schemas/Prefecture'
       required:
         - id
         - m_prefecture_id
@@ -127,7 +157,3 @@ components:
         - name_katakana
         - parent_city_id
         - is_designated
-        - created_at
-        - updated_at
-        - created_by
-        - updated_by
