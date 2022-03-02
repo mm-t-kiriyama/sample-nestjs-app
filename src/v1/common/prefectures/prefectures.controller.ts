@@ -4,6 +4,10 @@ import {
   Param,
   NotFoundException,
   UseFilters,
+  ParseIntPipe,
+  Body,
+  Post,
+  ValidationPipe,
 } from '@nestjs/common';
 import { PrefecturesService } from './prefectures.service';
 import { Prefecture } from './entities/prefecture.entity';
@@ -11,6 +15,7 @@ import { CitiesService } from '../cities/cities.service';
 import { City } from '../cities/entities/city.entity';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { HttpExceptionFilter } from '../../../app/filters/http-exception.filter';
+import { CreatePrefectureDto } from './dto/create-prefecture.dto';
 
 // OpenAPI tag に相当
 @ApiTags('prefectures')
@@ -24,6 +29,18 @@ export class PrefecturesController {
     private readonly prefecturesService: PrefecturesService,
     private readonly citiesService: CitiesService,
   ) {}
+
+  /**
+   * POSTバリデーションの確認用メソッド
+   * NOTE: createPrefectureDtoに記載されているリクエストBodyの形式でないとエラーが発生する
+   * 
+   * @param createPrefectureDto 
+   * @returns 
+   */
+  @Post()
+  async create(@Body(new ValidationPipe()) createPrefectureDto: CreatePrefectureDto) {
+    return 'response OK'
+  }
 
   /**
    * 都道府県一覧を取得する
@@ -56,8 +73,8 @@ export class PrefecturesController {
     summary: '都道府県IDの都道府県情報を取得する',
   })
   @Get(':id')
-  async findById(@Param('id') id: string): Promise<Prefecture> {
-    return await this.prefecturesService.findById(+id);
+  async findById(@Param('id', ParseIntPipe) id: number): Promise<Prefecture> {
+    return await this.prefecturesService.findById(id);
   }
 
   /**
@@ -73,8 +90,8 @@ export class PrefecturesController {
     operationId: 'findCitiesByPrefectureId',
     summary: '都道府県IDに紐づく市区町村リストを取得する',
   })
-  async findCitiesByPrefectureId(@Param('id') id: string): Promise<City[]> {
-    const cities = await this.citiesService.findByPrefectureId(+id);
+  async findCitiesByPrefectureId(@Param('id', ParseIntPipe) id: number): Promise<City[]> {
+    const cities = await this.citiesService.findByPrefectureId(id);
     // 市区町村リストが取得出来ない場合は 404エラーを投げる
     // SEE: https://docs.nestjs.com/exception-filters
     if (!cities.length) {
