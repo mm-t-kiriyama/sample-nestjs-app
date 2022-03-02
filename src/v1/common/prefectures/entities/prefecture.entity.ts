@@ -50,11 +50,12 @@ export class Prefecture {
      * NOTE: 1つの都道府県は複数の市区町村を持つ = OneToMany
      * SEE: https://orkhan.gitbook.io/typeorm/docs/many-to-one-one-to-many-relations
      */
+    @ApiHideProperty()
     @OneToMany(() => City, (city) => city.prefecture, {
         createForeignKeyConstraints: false,
         persistence: false,
     })
-    readonly city?: City
+    readonly city: City[]
 
     // TODO: エリアとのリレーションを記載
 }

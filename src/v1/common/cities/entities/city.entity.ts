@@ -16,7 +16,7 @@ export class City {
     @Column({type: 'varchar', length: 255, comment: '市区町村名'})
     name: string
 
-    @ApiProperty({example: 'ひらがな', description: '市区町村名_ひらがな'})
+    @ApiProperty({example: 'おおさかし', description: '市区町村名_ひらがな'})
     @Column({type: 'varchar', length: 255, comment: '市区町村名_ひらがな'})
     name_hiragana: string;
 
@@ -53,6 +53,7 @@ export class City {
      * NOTE: 複数の市区町村は1つの都道府県を持つ = ManyToOne
      * SEE: https://orkhan.gitbook.io/typeorm/docs/many-to-one-one-to-many-relations
      */
+    @ApiHideProperty()
     @ManyToOne(() => Prefecture, (prefecture) => prefecture.city, {
         createForeignKeyConstraints: false,
         persistence: false,

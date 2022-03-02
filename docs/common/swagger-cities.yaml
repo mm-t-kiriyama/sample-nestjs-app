@@ -48,7 +48,7 @@ components:
           description: 市区町村名
         name_hiragana:
           type: string
-          example: ひらがな
+          example: おおさかし
           description: 市区町村名_ひらがな
         name_katakana:
           type: string
@@ -63,16 +63,6 @@ components:
           type: boolean
           example: true
           description: 政令指定都市フラグ
-        prefecture:
-          description: >-
-            リレーションを定義
-
-            NOTE: 複数の市区町村は1つの都道府県を持つ = ManyToOne
-
-            SEE:
-            https://orkhan.gitbook.io/typeorm/docs/many-to-one-one-to-many-relations
-          allOf:
-            - $ref: '#/components/schemas/Prefecture'
       required:
         - id
         - m_prefecture_id
@@ -81,47 +71,3 @@ components:
         - name_katakana
         - parent_city_id
         - is_designated
-    Prefecture:
-      type: object
-      properties:
-        id:
-          type: number
-          example: 27
-          description: 都道府県ID
-        m_areas_id:
-          type: number
-          example: 7
-          description: 都道府県に紐づくエリアID
-        name:
-          type: string
-          example: 大阪府
-          description: 都道府県名
-        name_hiragana:
-          type: string
-          example: おおさかふ
-          description: 都道府県名_ひらがな
-        name_katakana:
-          type: string
-          example: オオサカフ
-          description: 都道府県名_カタカナ
-        name_roman:
-          type: string
-          example: osaka
-          description: 都道府県名_カタカナ
-        city:
-          description: >-
-            リレーションを定義
-
-            NOTE: 1つの都道府県は複数の市区町村を持つ = OneToMany
-
-            SEE:
-            https://orkhan.gitbook.io/typeorm/docs/many-to-one-one-to-many-relations
-          allOf:
-            - $ref: '#/components/schemas/City'
-      required:
-        - id
-        - m_areas_id
-        - name
-        - name_hiragana
-        - name_katakana
-        - name_roman

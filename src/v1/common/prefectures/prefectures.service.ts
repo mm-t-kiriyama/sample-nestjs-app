@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Prefecture } from './entities/prefecture.entity';
 import { Repository } from 'typeorm';
 
-
 @Injectable()
 export class PrefecturesService {
   constructor(
@@ -12,10 +11,14 @@ export class PrefecturesService {
   ) {}
 
   findAll() {
-    return this.prefecturesRepository.find()
+    return this.prefecturesRepository.find({
+      select: ['id', 'm_areas_id', 'name', 'name_hiragana', 'name_katakana', 'name_roman']
+    })
   }
 
   findById(id: number) {
-    return this.prefecturesRepository.findOneOrFail(id)
+    return this.prefecturesRepository.findOne(id, {
+      select: ['id', 'm_areas_id', 'name', 'name_hiragana', 'name_katakana', 'name_roman']
+    })
   }
 }

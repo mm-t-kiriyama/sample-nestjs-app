@@ -104,16 +104,6 @@ components:
           type: string
           example: osaka
           description: 都道府県名_カタカナ
-        city:
-          description: >-
-            リレーションを定義
-
-            NOTE: 1つの都道府県は複数の市区町村を持つ = OneToMany
-
-            SEE:
-            https://orkhan.gitbook.io/typeorm/docs/many-to-one-one-to-many-relations
-          allOf:
-            - $ref: '#/components/schemas/City'
       required:
         - id
         - m_areas_id
@@ -138,7 +128,7 @@ components:
           description: 市区町村名
         name_hiragana:
           type: string
-          example: ひらがな
+          example: おおさかし
           description: 市区町村名_ひらがな
         name_katakana:
           type: string
@@ -153,16 +143,6 @@ components:
           type: boolean
           example: true
           description: 政令指定都市フラグ
-        prefecture:
-          description: >-
-            リレーションを定義
-
-            NOTE: 複数の市区町村は1つの都道府県を持つ = ManyToOne
-
-            SEE:
-            https://orkhan.gitbook.io/typeorm/docs/many-to-one-one-to-many-relations
-          allOf:
-            - $ref: '#/components/schemas/Prefecture'
       required:
         - id
         - m_prefecture_id
