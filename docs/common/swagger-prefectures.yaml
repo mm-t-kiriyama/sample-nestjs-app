@@ -1,28 +1,6 @@
 openapi: 3.0.0
 paths:
   /prefectures:
-    post:
-      operationId: PrefecturesController_create
-      summary: ''
-      description: |-
-        POSTバリデーションの確認用メソッド
-        NOTE: createPrefectureDtoに記載されているリクエストBodyの形式でないとエラーが発生する
-      parameters: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreatePrefectureDto'
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: string
-      tags: &ref_0
-        - prefectures
     get:
       operationId: findAll
       summary: 都道府県リストを取得する
@@ -37,35 +15,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Prefecture'
-      tags: *ref_0
-  /prefectures/test-query-param:
-    get:
-      operationId: PrefecturesController_testQueryParam
-      summary: ''
-      description: >-
-        クエリパラメータのバリデーション確認用メソッド
-
-        NOTE: note that ParseStringPipe is not needed because, as mentioned
-        earlier,
-
-        every path parameter and query parameter comes over the network as a
-        string by default.
-
-        SEE: https://docs.nestjs.com/techniques/validation
-      parameters:
-        - name: id
-          required: true
-          in: query
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: string
-      tags: *ref_0
+      tags: &ref_0
+        - prefectures
   /prefectures/{id}:
     get:
       operationId: findById
@@ -126,16 +77,6 @@ tags:
 servers: []
 components:
   schemas:
-    CreatePrefectureDto:
-      type: object
-      properties:
-        name:
-          type: string
-        m_area_id:
-          type: number
-      required:
-        - name
-        - m_area_id
     Prefecture:
       type: object
       properties:

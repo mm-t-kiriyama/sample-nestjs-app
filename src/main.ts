@@ -17,7 +17,7 @@ async function bootstrap() {
   // TODO: ディレクトリ構成とバージョニングについて考える
   // NOTE: v2を実装する際は色々考えないといけない
   // SEE: https://qiita.com/potato4d/items/2d5dc727d33e06260a44
-  // app.setGlobalPrefix('v1');
+  app.setGlobalPrefix('v1');
 
   /**
    * 都道府県のAPI仕様書

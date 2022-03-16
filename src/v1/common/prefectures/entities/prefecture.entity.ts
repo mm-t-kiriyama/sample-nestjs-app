@@ -55,7 +55,7 @@ export class Prefecture {
     createForeignKeyConstraints: false,
     persistence: false,
   })
-  readonly city: City[];
+  readonly city: City;
 
   // TODO: エリアとのリレーションを記載
 }

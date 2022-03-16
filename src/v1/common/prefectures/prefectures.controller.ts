@@ -33,33 +33,6 @@ export class PrefecturesController {
   ) {}
 
   /**
-   * POSTバリデーションの確認用メソッド
-   * NOTE: createPrefectureDtoに記載されているリクエストBodyの形式でないとエラーが発生する
-   *
-   * @param createPrefectureDto
-   * @returns
-   */
-  @Post()
-  @UsePipes(new ValidationPipe())
-  async create(@Body() createPrefectureDto: CreatePrefectureDto) {
-    return 'response OK';
-  }
-
-  /**
-   * クエリパラメータのバリデーション確認用メソッド
-   * NOTE: note that ParseStringPipe is not needed because, as mentioned earlier,
-   *       every path parameter and query parameter comes over the network as a string by default.
-   * SEE: https://docs.nestjs.com/techniques/validation
-   *
-   * @param name
-   * @returns
-   */
-  @Get('/test-query-param')
-  async testQueryParam(@Query('id', ParseIntPipe) number: string) {
-    return 'response OK';
-  }
-
-  /**
    * 都道府県一覧を取得する
    *
    * @url /v1/prefecutes

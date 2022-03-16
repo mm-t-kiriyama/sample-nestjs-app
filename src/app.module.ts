@@ -7,6 +7,7 @@ import { CitiesModule } from './v1/common/cities/cities.module';
 import { Connection } from 'typeorm';
 import { JobOffersModule } from './v1/common/job-offers/job-offers.module';
 import { IryouJobOffersModule } from './v1/iryou/job-offers/job-offers.module';
+import { AreasModule } from './v1/common/areas/areas.module';
 
 @Module({
   imports: [
@@ -18,13 +19,15 @@ import { IryouJobOffersModule } from './v1/iryou/job-offers/job-offers.module';
       password: '28fLE3AxD8zIGWF8vwS1',
       database: 'trytworker_stg_v2',
       entities: ['dist/**/*.entity{ .ts,.js}'],
+      logging: true
       // NOTE: Setting synchronize: true shouldn't be used in production - otherwise you can lose production data.
       // synchronize: true,
     }),
     PrefecturesModule,
     CitiesModule,
     JobOffersModule,
-    IryouJobOffersModule
+    IryouJobOffersModule,
+    AreasModule,
   ],
   controllers: [AppController],
   providers: [AppService],
