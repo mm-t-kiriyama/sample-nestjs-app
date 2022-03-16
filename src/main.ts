@@ -3,6 +3,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as fs from 'fs';
 import { dump } from 'js-yaml';
 import { AppModule } from './app.module';
+import { SharedPrefecturesModule } from './using-shared-modules/shared-prefectures/shared-prefectures.module';
 import { CitiesModule } from './v1/common/cities/cities.module';
 import { PrefecturesModule } from './v1/common/prefectures/prefectures.module';
 import { IryouJobOffersModule } from './v1/iryou/job-offers/job-offers.module';
@@ -29,53 +30,53 @@ async function bootstrap() {
     .setTitle('Prefectures')
     .setDescription('Prefectures API description')
     .setVersion('1.0')
-    .addTag('prefectures', '都道府県API')
+    .addTag('prefectures', '共通モジュールを利用した都道府県API')
     .build();
   const prefectureDocuments = SwaggerModule.createDocument(
     app,
     prefecturesOptions,
     {
       // PrefecturesModuleを指定 (複数のModuleを指定することも可能)
-      include: [PrefecturesModule],
+      include: [SharedPrefecturesModule],
     },
   );
-  SwaggerModule.setup('api/common/prefectures', app, prefectureDocuments);
-  // ファイルを出力する (prefectureDocuments オブジェクトがyaml形式になってます)
-  fs.writeFileSync(
-    './docs/common/swagger-prefectures.yaml',
-    dump(prefectureDocuments, {}),
-  );
+  SwaggerModule.setup('api/common/shared-prefectures', app, prefectureDocuments);
+  // // ファイルを出力する (prefectureDocuments オブジェクトがyaml形式になってます)
+  // fs.writeFileSync(
+  //   './docs/common/swagger-prefectures.yaml',
+  //   dump(prefectureDocuments, {}),
+  // );
 
-  // Cities Documents
-  const citiesOptions = new DocumentBuilder()
-    .setTitle('Cities')
-    .setDescription('Cities API description')
-    .setVersion('1.0')
-    .addTag('cities')
-    .build();
-  const citiesDocuments = SwaggerModule.createDocument(app, citiesOptions, {
-    include: [CitiesModule],
-  });
-  SwaggerModule.setup('api/common/cities', app, citiesDocuments);
-  fs.writeFileSync(
-    './docs/common/swagger-cities.yaml',
-    dump(citiesDocuments, {}),
-  );
+  // // Cities Documents
+  // const citiesOptions = new DocumentBuilder()
+  //   .setTitle('Cities')
+  //   .setDescription('Cities API description')
+  //   .setVersion('1.0')
+  //   .addTag('cities')
+  //   .build();
+  // const citiesDocuments = SwaggerModule.createDocument(app, citiesOptions, {
+  //   include: [CitiesModule],
+  // });
+  // SwaggerModule.setup('api/common/cities', app, citiesDocuments);
+  // fs.writeFileSync(
+  //   './docs/common/swagger-cities.yaml',
+  //   dump(citiesDocuments, {}),
+  // );
 
-  // Iryou Documents
-  const IryouOptions = new DocumentBuilder()
-    .setTitle('Iryou')
-    .setDescription('Iryou API description')
-    .setVersion('1.0')
-    .addTag('iryou')
-    .build();
-  const iryouDocuments = SwaggerModule.createDocument(app, IryouOptions, {
-    include: [IryouJobOffersModule], // 医療に関するモジュールを追加していく
-  });
-  fs.writeFileSync(
-    './docs/common/swagger-iryou.yaml',
-    dump(iryouDocuments, {})
-  );
+  // // Iryou Documents
+  // const IryouOptions = new DocumentBuilder()
+  //   .setTitle('Iryou')
+  //   .setDescription('Iryou API description')
+  //   .setVersion('1.0')
+  //   .addTag('iryou')
+  //   .build();
+  // const iryouDocuments = SwaggerModule.createDocument(app, IryouOptions, {
+  //   include: [IryouJobOffersModule], // 医療に関するモジュールを追加していく
+  // });
+  // fs.writeFileSync(
+  //   './docs/common/swagger-iryou.yaml',
+  //   dump(iryouDocuments, {})
+  // );
 
   await app.listen(3000);
 }

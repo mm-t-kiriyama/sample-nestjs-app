@@ -16,6 +16,20 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
-  }
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@shared-modules/prefectures": [
+        "sample-nestjs-library/libs/prefectures/src"
+      ],
+      "@shared-modules/prefectures/*": [
+        "sample-nestjs-library/libs/prefectures/src/*"
+      ],
+      "@shared-modules/cities": [
+        "sample-nestjs-library/libs/cities/src"
+      ],
+      "@shared-modules/cities/*": [
+        "sample-nestjs-library/libs/cities/src/*"
+      ]
+    }
+  },
 }

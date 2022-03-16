@@ -8,6 +8,7 @@ import { Connection } from 'typeorm';
 import { JobOffersModule } from './v1/common/job-offers/job-offers.module';
 import { IryouJobOffersModule } from './v1/iryou/job-offers/job-offers.module';
 import { AreasModule } from './v1/common/areas/areas.module';
+import { SharedPrefecturesModule } from './using-shared-modules/shared-prefectures/shared-prefectures.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { AreasModule } from './v1/common/areas/areas.module';
     JobOffersModule,
     IryouJobOffersModule,
     AreasModule,
+    SharedPrefecturesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,6 +1,26 @@
 {
   "collection": "@nestjs/schematics",
   "sourceRoot": "src",
+  "projects": {
+    "prefectures": {
+      "type": "library",
+      "root": "sample-nestjs-library/libs/prefectures",
+      "entryFile": "index",
+      "sourceRoot": "sample-nestjs-library/libs/prefectures/src",
+      "compilerOptions": {
+        "tsConfigPath": "sample-nestjs-library/libs/prefectures/tsconfig.lib.json"
+      }
+    },
+    "cities": {
+      "type": "library",
+      "root": "sample-nestjs-library/libs/cities",
+      "entryFile": "index",
+      "sourceRoot": "sample-nestjs-library/libs/cities/src",
+      "compilerOptions": {
+        "tsConfigPath": "sample-nestjs-library/libs/cities/tsconfig.lib.json"
+      }
+    }
+  },
   "compilerOptions": {
     "plugins": [
       {
