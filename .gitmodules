@@ -1,3 +1,6 @@
 [submodule "sample-shared-modules"]
 	path = sample-shared-modules
 	url = https://github.com/mm-t-kiriyama/sample-shared-modules
+[submodule "sample-nestjs-library"]
+	path = sample-nestjs-library
+	url = https://github.com/mm-t-kiriyama/sample-nestjs-library.git
